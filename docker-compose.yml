@@ -1,0 +1,24 @@
+version: '3.1'
+
+services:
+  postgres-master:
+    image: postgres:13
+    environment: 
+      POSTGRES_USER: masteruser
+      POSTGRES_PASSWORD: masterpass
+      POSTGRES_DB: masterdb
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./master-data:/var/lib/postgresql/data
+
+  postgres-replica:
+    image: postgres:13
+    environment: 
+      POSTGRES_USER: replicauser
+      POSTGRES_PASSWORD: replicapass
+      POSTGRES_DB: replicadb
+    ports:
+      - "5433:5432"
+    volumes:
+      - ./replica-data:/var/lib/postgresql/data
